@@ -56,7 +56,7 @@ void CreateCombinations(int offset, int k);
 //Condicion para la combinacion de puntos, si el id ya esta en la combinacion retorna false
 bool isUnique(Angle anglesI[][maxVectors], Angle angle);
 
-//"Usa la combinacion de angulos para chequear si suman 360"
+//Usa la combinacion de angulos para chequear si suman 360
 void SumOfPoint(Angle anglesCombination[][maxVectors]);
 
 int main()
@@ -78,7 +78,7 @@ int main()
     {
         for (int j = 0; j < maxVectors; ++j)
         {
-            intersectionPoints[i][j] = {-1, -1};  //el -1 declara que esta vacio
+            intersectionPoints[i][j] = {-1, -1}; //el -1 declara que esta vacio
             intersectionAngles[i][j] = -1;
         }
     }
@@ -88,7 +88,7 @@ int main()
     {
         SortVector(vectors[i]);
     }
-    //CHEQUEA TODOS LOS PUNTOS DE COLISION
+    //CHEQUEA LOS PUNTOS DE COLISION
     for (int i = 0; i < maxVectors; ++i)
     {
         for (int j = i + 1; j < maxVectors; ++j)
@@ -117,7 +117,7 @@ int main()
             }
         }
     }
-    
+
     CreateCombinations(0, maxVectors);
     SumOfPoint(pointCombinations);
     while (!WindowShouldClose())
@@ -285,6 +285,7 @@ void PrintCombination(const vector<int>& v)
 
 int positionI = 0;
 int positionJ = 0;
+
 void CreateCombinations(int offset, int k)
 {
     /*
@@ -307,9 +308,9 @@ void CreateCombinations(int offset, int k)
     */
     for (int i = 0; i < 126; ++i)
     {
-        for (int j = i+1; j < maxVectors; ++j)
+        for (int j = i + 1; j < maxVectors; ++j)
         {
-            if(i!=j && isUnique(pointCombinations, angles[i]))
+            if (i != j && isUnique(pointCombinations, angles[i]))
             {
                 pointCombinations[positionI][positionJ] = angles[i];
                 positionJ++;
