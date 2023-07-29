@@ -5,13 +5,14 @@ using Object = UnityEngine.Object;
 
 public class BSP : MonoBehaviour
 {
-    [SerializeField] Object[] objects;
+    [SerializeField] private static Object[] objects;
     private IdentifySideOnPlane _identifySideOnPlane;
     private Material _renderMat;
-    private String[] _tags;
+    private Camera _camera;
+
     void Start()
     {
-        _tags = UnityEditorInternal.InternalEditorUtility.tags;
+        _camera = Camera.main;
         objects = FindObjectsOfType(typeof(IdentifySideOnPlane));
     }
 
@@ -24,9 +25,9 @@ public class BSP : MonoBehaviour
 
     void SortObjectsArray()
     {
-        if (Camera.main != null)
+        if (_camera != null)
         {
-            Vector3 cameraPos = Camera.main.transform.position;
+            Vector3 cameraPos = _camera.transform.position;
 
             for (int i = 0; i < objects.Length; i++)
             {
@@ -47,7 +48,7 @@ public class BSP : MonoBehaviour
 
     void CheckOverlaps()
     {
-        foreach (var t in objects)
+        foreach (Object t in objects)
         {
             t.GetComponent<MeshRenderer>().enabled = true;
         }
@@ -75,15 +76,15 @@ public class BSP : MonoBehaviour
 
                 if (!(minX <= minX2) || !(maxX >= maxX2)) continue;
                 if (!(minY <= minY2) || !(maxY >= maxY2)) continue;
-                //if (!(minZ <= minZ2) || !(maxZ >= maxZ2)) continue;
+                if (!(minZ <= minZ2) || !(maxZ >= maxZ2)) continue;
                 objects[j].GetComponent<MeshRenderer>().enabled = false;
             }
         }
     }
 
-    void CheckActiveRoom()
+    public static void CheckActiveRoom()
     {
-        foreach (var t in objects)
+        foreach (Object t in objects)
         {
             if (t.GetComponent<MeshRenderer>().enabled)
             {
@@ -92,11 +93,12 @@ public class BSP : MonoBehaviour
         }
     }
 
-    void EnableTaggedRoom(String tag)
+    public static void EnableTaggedRoom(String tag)
     {
-        foreach (var t in objects)
+        //GameObject[] taggedObjects = GameObject.FindGameObjectsWithTag(tag);
+        foreach (Object t in objects)
         {
-            if (t.GameObject().CompareTag(tag)) t.GetComponent<MeshRenderer>().enabled = true;
+            if (t.GameObject().CompareTag(tag)) t.GetComponent<IdentifySideOnPlane>().isActive = true;
         } 
     }
 }

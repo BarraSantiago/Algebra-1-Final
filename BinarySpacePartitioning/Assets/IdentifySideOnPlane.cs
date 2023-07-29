@@ -10,6 +10,7 @@ public class IdentifySideOnPlane : MonoBehaviour
     private Vector3[] _objectVertices;
     private Material _renderMat;
     private int _color1;
+    private Color _objectColor;
     public Mesh GetMesh => _meshFilter;
     [SerializeField] public float minX, maxX, minY, maxY, minZ, maxZ;
 
@@ -29,6 +30,7 @@ public class IdentifySideOnPlane : MonoBehaviour
     {
         CheckInsideOfBounds();
         CheckMinMax();
+        _renderMat.SetColor(_color1, _objectColor);
     }
 
     void CheckMinMax()
@@ -40,7 +42,7 @@ public class IdentifySideOnPlane : MonoBehaviour
         minZ = Single.MaxValue;
         maxZ = Single.MinValue;
 
-        foreach (var t in _vertices)
+        foreach (Vector3 t in _vertices)
         {
             if (minX > transform.TransformPoint(t).x) minX = transform.TransformPoint(t).x;
             if (maxX < transform.TransformPoint(t).x) maxX = transform.TransformPoint(t).x;
@@ -67,17 +69,16 @@ public class IdentifySideOnPlane : MonoBehaviour
     {
         foreach (PlaneCreator t in planes)
         {
-            if (IsInFrustum(t))
+            if (!IsInFrustum(t))
             {
-                isActive = false;
-                _renderMat.SetColor(_color1, Color.red);
+                _objectColor = Color.red;
+                _renderMat.SetColor(_color1, _objectColor);
                 return false;
             }
 
-            isActive = true;
-            _renderMat.SetColor(_color1, Color.green);
+            _objectColor = Color.green;
         }
-
+_renderMat.SetColor(_color1, _objectColor);
         return true;
     }
 
@@ -92,7 +93,6 @@ public class IdentifySideOnPlane : MonoBehaviour
             }
         }
 
-        return counter >= _meshFilter.vertices.Length;
-
+        return counter < _meshFilter.vertices.Length;
     }
 }

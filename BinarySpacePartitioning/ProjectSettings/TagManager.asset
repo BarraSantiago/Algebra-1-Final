@@ -5,11 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - FoVPlane
-  - Room1
-  - Room2
-  - Room3
-  - Room4
-  - Room5
+  - Cullable
   layers:
   - Default
   - TransparentFX
@@ -18,7 +14,7 @@ TagManager:
   - Water
   - UI
   - Door
-  - 
+  - Cullable
   - 
   - 
   - 

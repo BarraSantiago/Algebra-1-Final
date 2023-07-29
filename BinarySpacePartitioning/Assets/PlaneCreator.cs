@@ -11,8 +11,7 @@ public class PlaneCreator : MonoBehaviour
         private set;
         get;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         Plane = new Plane(planeTransform.up, planeTransform.position);
