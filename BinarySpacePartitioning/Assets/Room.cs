@@ -1,72 +1,87 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 
 public class Room : MonoBehaviour
 {
-    private List<Transform> wallTransforms = new List<Transform>();
-    public List<IdentifySideOnPlane> doors = new List<IdentifySideOnPlane>();
-    [SerializeField] List<Room> adyacentRooms = new List<Room>();
-    private Bounds boundsRoom;
-    private Transform camTransform;
-    public bool isVisible;
     public short roomId;
+    public Extremes roomExtremes;
+    public short[] adjacentRoomsIds;
+    public bool isVisible;
+
+    private const string CullableName = "Cullable";
+    private List<CullableObject> _roomMembers;
+
     private void Awake()
     {
-        wallTransforms = GetComponentsInChildren<Transform>().ToList();
-    }
+        _roomMembers = new List<CullableObject>();
 
-    private void Start()
-    {
-        camTransform = Camera.main.transform;
-        boundsRoom.max = Vector3.one * -1000;
-        boundsRoom.min = Vector3.one * 1000;
-        for (int i = 0; i < wallTransforms.Count; i++)
+        GameObject[] cullableObjects = GameObject.FindGameObjectsWithTag(CullableName);
+
+        foreach (GameObject cullableObject in cullableObjects)
         {
-            MeshFilter meshFilter = wallTransforms[i].GetComponent<MeshFilter>();
-
-            if (!meshFilter) continue;
-
-            for (int j = 0; j < meshFilter.mesh.vertices.Length; j++)
+            if (cullableObject.GetComponent<CullableObject>().roomId == roomId)
             {
-                Vector3 pos = wallTransforms[i].TransformPoint(meshFilter.mesh.vertices[i]);
-                if (pos.x > boundsRoom.max.x) boundsRoom.max = new Vector3(pos.x, boundsRoom.max.y, boundsRoom.max.z);
-                if (pos.y > boundsRoom.max.y) boundsRoom.max = new Vector3(boundsRoom.max.x, pos.y, boundsRoom.max.z);
-                if (pos.z > boundsRoom.max.z) boundsRoom.max = new Vector3(boundsRoom.max.x, boundsRoom.max.y, pos.z);
-
-                if (pos.x < boundsRoom.min.x) boundsRoom.min = new Vector3(pos.x, boundsRoom.min.y, boundsRoom.min.z);
-                if (pos.y < boundsRoom.min.y) boundsRoom.min = new Vector3(boundsRoom.min.x, pos.y, boundsRoom.min.z);
-                if (pos.z < boundsRoom.min.z) boundsRoom.min = new Vector3(boundsRoom.min.x, boundsRoom.min.y, pos.z);
+                _roomMembers.Add(cullableObject.GetComponent<CullableObject>());
             }
         }
     }
 
-    private void Update()
+    private void OnEnable()
     {
+        CullableObject.onCullableObjectCreation += CheckRoomObjects;
+    }
+
+    private void OnDisable()
+    {
+        CullableObject.onCullableObjectCreation -= CheckRoomObjects;
+    }
+
+    public void MakeMembersVisible()
+    {
+        foreach (CullableObject cObject in _roomMembers)
+        {
+            cObject.SetColor(Color.green);
+        }
+
+        isVisible = true;
+    }
+
+    public void MakeMembersInvisible()
+    {
+        foreach (CullableObject cObject in _roomMembers)
+        {
+            cObject.SetColor(Color.red);
+        }
+
         isVisible = false;
+    }
 
-        if (boundsRoom.Contains(camTransform.position))
+    private void CheckRoomObjects()
+    {
+        roomExtremes.minX = Single.MaxValue;
+        roomExtremes.maxX = Single.MinValue;
+        roomExtremes.minY = Single.MaxValue;
+        roomExtremes.maxY = Single.MinValue;
+        roomExtremes.minZ = Single.MaxValue;
+        roomExtremes.maxZ = Single.MinValue;
+
+        foreach (CullableObject roomMember in _roomMembers)
         {
-            isVisible = true;
-            //BSP.EnableTaggedRoom(tag);
-        }
-        else
-        {
-            for (int i = 0; i < doors.Count; i++)
+            if (roomMember.roomId == roomId)
             {
-                for (int j = 0; j < doors[i].GetMesh.vertices.Length; j++)
-                {
-                    if (doors[i].CheckFrustum())
-                    {
-                        //BSP.EnableTaggedRoom(tag);
-
-                        isVisible = true;
-                        break;
-                    }
-                }
-                if (isVisible) break;
+                if (roomExtremes.minX > roomMember.extremes.minX) roomExtremes.minX = roomMember.extremes.minX;
+                if (roomExtremes.maxX < roomMember.extremes.maxX) roomExtremes.maxX = roomMember.extremes.maxX;
+                if (roomExtremes.minY > roomMember.extremes.minY) roomExtremes.minY = roomMember.extremes.minY;
+                if (roomExtremes.maxY < roomMember.extremes.maxY) roomExtremes.maxY = roomMember.extremes.maxY;
+                if (roomExtremes.minZ > roomMember.extremes.minZ) roomExtremes.minZ = roomMember.extremes.minZ;
+                if (roomExtremes.maxZ < roomMember.extremes.maxZ) roomExtremes.maxZ = roomMember.extremes.maxZ;
             }
+        }
+
+        for (int i = 0; i < _roomMembers.Count; i++)
+        {
         }
     }
 }

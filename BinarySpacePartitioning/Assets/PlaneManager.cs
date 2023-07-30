@@ -1,62 +1,50 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlaneManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] planeObjects;
+    [SerializeField] private Camera mainCamera;
 
-    private Plane[] _planes;
-    private Camera _camera;
+    public GameObject[] planeObjects;
+    public static Action OnCameraChangeEvent;
+
     private float _lastFOV;
     private Vector3 _lastPosition;
+    private Quaternion _lastRotation;
 
     private void Start()
     {
-        _camera = Camera.main;
-        _lastFOV = _camera!.fieldOfView;
-        _lastPosition = _camera.transform.position;
+        _lastFOV = mainCamera!.fieldOfView;
+        _lastPosition = mainCamera.transform.position;
+        
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
 
-        _planes = GeometryUtility.CalculateFrustumPlanes(_camera);
-
+        // Create a "Plane" GameObject aligned to each of the calculated planes
         for (int i = 0; i < 6; ++i)
         {
-            planeObjects[i].transform.position = -_planes[i].normal * _planes[i].distance;
-            planeObjects[i].transform.rotation = Quaternion.FromToRotation(Vector3.up, _planes[i].normal);
+            planeObjects[i].transform.position = -planes[i].normal * planes[i].distance;
+            planeObjects[i].transform.rotation = Quaternion.FromToRotation(Vector3.up, planes[i].normal);
         }
     }
 
     private void LateUpdate()
     {
-        const float epsilon = 1e-05f;
         
-        if (Math.Abs(_camera.fieldOfView - _lastFOV) > epsilon)
-        {
-            _planes = GeometryUtility.CalculateFrustumPlanes(_camera);
-            OnFieldOfViewChanged();
-            _lastFOV = _camera.fieldOfView;
-        }
+        const float epsilon = 1e-05f;
 
-        if (transform.position != _lastPosition)
-        {
-            _planes = GeometryUtility.CalculateFrustumPlanes(_camera);
-            OnCameraMoved();
-            _lastPosition = transform.position;
-        }
-    }
+        Transform objectTransform = mainCamera.transform;
 
-    private void OnFieldOfViewChanged()
-    {
-        for (int i = 0; i < 6; ++i)
-        {
-            planeObjects[i].transform.position = -_planes[i].normal * _planes[i].distance;
-        }
-    }
+        bool hasChanged = Math.Abs(mainCamera.fieldOfView - _lastFOV) > epsilon ||
+                          objectTransform.position != _lastPosition || objectTransform.rotation != _lastRotation;
 
-    private void OnCameraMoved()
-    {
-        for (int i = 0; i < 6; ++i)
+        if (hasChanged)
         {
-            planeObjects[i].transform.rotation = Quaternion.FromToRotation(Vector3.up, _planes[i].normal);
+            OnCameraChangeEvent?.Invoke();
+
+            _lastFOV = mainCamera.fieldOfView;
+            _lastPosition = objectTransform.position;
+            _lastRotation = objectTransform.rotation;
         }
     }
 }

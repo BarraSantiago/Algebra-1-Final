@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlaneCreator : MonoBehaviour
 {
-    [SerializeField] private Transform planeTransform;
-
     public Plane Plane
     {
         private set;
@@ -14,6 +10,7 @@ public class PlaneCreator : MonoBehaviour
     
     void Update()
     {
-        Plane = new Plane(planeTransform.up, planeTransform.position);
+        Transform objectTransform = transform;
+        Plane = new Plane(objectTransform.up, objectTransform.position);
     }
 }

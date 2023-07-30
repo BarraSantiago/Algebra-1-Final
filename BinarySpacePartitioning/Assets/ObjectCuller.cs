@@ -1,61 +1,109 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectCuller : MonoBehaviour
 {
+    [SerializeField] private Room[] rooms;
+    [SerializeField] private PlaneCreator[] planes;
+    [SerializeField] private float maxDistance = 10f;
+    [SerializeField] private float stepSize = 0.1f;
+    [SerializeField] private int numRays = 10;
+
+    private Vector3[] _points;
+
     private Camera _mainCamera;
     private CullableObject[] _cullableObjects;
-    private GameObject[] _cullableObjectsInScene;
-    private PlaneCreator[] _frustumPlanes;
+    private Dictionary<int, Room> _idRoom;
+    private const string CullableName = "Cullable";
 
     private void Awake()
     {
         _mainCamera = Camera.main;
+
+        _points = new Vector3[numRays];
     }
 
     private void Start()
     {
-        GameObject[] planes = GameObject.FindGameObjectsWithTag("FoVPlane");
-
-        _frustumPlanes = new PlaneCreator[planes.Length];
-
-        for (int i = 0; i < planes.Length; i++)
-        {
-            _frustumPlanes[i] = planes[i].GetComponent<PlaneCreator>();
-        }
-
         UpdateCullableObjects();
+
+        _idRoom = new Dictionary<int, Room>();
+
+        foreach (Room room in rooms)
+        {
+            _idRoom[room.roomId] = room;
+        }
     }
 
     private void OnEnable()
     {
+        PlaneManager.OnCameraChangeEvent += Checkobjects;
+
         CullableObject.onCullableObjectCreation += UpdateCullableObjects;
     }
 
     private void OnDisable()
     {
+        PlaneManager.OnCameraChangeEvent -= Checkobjects;
+
         CullableObject.onCullableObjectCreation -= UpdateCullableObjects;
     }
 
-    private void Update()
+    private void Checkobjects()
     {
-        foreach (CullableObject cObject in _cullableObjects)
+        for (int i = 0; i < _idRoom.Count; i++)
         {
-            if (CheckFrustum(cObject))
+            _idRoom[i].MakeMembersInvisible();
+        }
+
+        for (int i = 0; i < _cullableObjects.Length; i++)
+        {
+            if (_idRoom[_cullableObjects[i].roomId].isVisible) continue;
+
+            short roomId = _cullableObjects[i].roomId;
+
+            bool objectPrinted = CheckFrustum(_cullableObjects[i]);
+
+            if (objectPrinted)
             {
-                cObject.SetColor(Color.green);
+                _idRoom[roomId].MakeMembersVisible();
             }
-            else
+        }
+
+        for (short i = 0; i < _idRoom.Count; i++)
+        {
+            if (CheckPointInsideRoom(i, _mainCamera.transform.position))
             {
-                cObject.SetColor(Color.red);
+                _idRoom[i].MakeMembersInvisible();
+
+                CreatePoints();
+                
+                foreach (Vector3 point in _points)
+                {
+                    if (!CheckPointInFrustum(point)) continue;
+
+                    CheckRooms(i, point);
+                }
+                
+                break;
             }
         }
     }
 
+    private bool CheckPointInsideRoom(short id, Vector3 position)
+    {
+        Extremes roomExtremes = _idRoom[id].roomExtremes;
+
+        return position.x <= roomExtremes.maxX && position.x >= roomExtremes.minX &&
+               position.y <= roomExtremes.maxY && position.y >= roomExtremes.minY &&
+               position.z <= roomExtremes.maxZ && position.z >= roomExtremes.minZ;
+    }
+
     private bool CheckFrustum(CullableObject cObject)
     {
-        foreach (PlaneCreator t in _frustumPlanes)
+        for (int i = 0; i < planes.Length; i++)
         {
-            if (!IsInFrustum(t, cObject))
+            if (!IsInFrustum(planes[i].Plane, cObject))
             {
                 return false;
             }
@@ -64,34 +112,97 @@ public class ObjectCuller : MonoBehaviour
         return true;
     }
 
-    private bool IsInFrustum(PlaneCreator planeCreator, CullableObject cObject)
+    private bool IsInFrustum(Plane plane, CullableObject cObject)
     {
         int counter = 0;
-        foreach (Vector3 t1 in cObject._objectVertices)
+        foreach (Vector3 t1 in cObject.objectVertices)
         {
-            if (!planeCreator.Plane.GetSide(t1))
+            if (!plane.GetSide(t1))
             {
                 counter++;
             }
         }
 
-        return counter < cObject._meshFilter.vertices.Length;
+        return counter < cObject.meshFilter.vertices.Length;
+    }
+
+    private bool CheckPointInFrustum(Vector3 point)
+    {
+        int counter = 0;
+
+        for (int i = 0; i < planes.Length; i++)
+        {
+            if (planes[i].Plane.GetSide(point)) counter++;
+        }
+
+        return counter >= planes.Length;
     }
 
     private void UpdateCullableObjects()
     {
-        _cullableObjectsInScene = GameObject.FindGameObjectsWithTag("Cullable");
+        GameObject[] cullableObjectsInScene = GameObject.FindGameObjectsWithTag(CullableName);
 
-        int objectsLength = _cullableObjectsInScene.Length;
-        
+        int objectsLength = cullableObjectsInScene.Length;
+
         if (_cullableObjects == null || _cullableObjects.Length != objectsLength)
         {
             _cullableObjects = new CullableObject[objectsLength];
         }
-        
+
         for (int i = 0; i < objectsLength; i++)
         {
-            _cullableObjects[i] = _cullableObjectsInScene[i].GetComponent<CullableObject>();
+            _cullableObjects[i] = cullableObjectsInScene[i].GetComponent<CullableObject>();
+        }
+    }
+
+    private void CreatePoints()
+    {
+        for (int i = 0; i < _points.Length; i++)
+        {
+            Vector3 direction = _mainCamera.transform.forward;
+            direction.y = 0f;
+            direction = Quaternion.Euler(0f, i * 360f / numRays, 0f) * direction;
+
+            float distance = 0f;
+
+            while (distance < maxDistance)
+            {
+                distance += stepSize;
+
+                _points[i] = _mainCamera.transform.position + direction * distance;
+
+                if (CheckPointInFrustum(_points[i]))
+                {
+                    if (Physics.CheckSphere(_points[i], stepSize))
+                    {
+                        Debug.DrawLine(_mainCamera.transform.position, _points[i], Color.red);
+                        break;
+                    }
+
+                    Debug.DrawLine(_mainCamera.transform.position, _points[i], Color.green);
+                }
+            }
+        }
+    }
+
+    private void CheckRooms(short roomId, Vector3 point)
+    {
+        HashSet<short> visited = new HashSet<short>();
+
+        TraverseRooms(roomId, point, visited);
+    }
+
+    private void TraverseRooms(short roomId, Vector3 point, HashSet<short> visited)
+    {
+        if (CheckPointInsideRoom(roomId, point) && !visited.Contains(roomId))
+        {
+            visited.Add(roomId);
+            _idRoom[roomId].MakeMembersVisible();
+
+            foreach (short adjacentRoom in _idRoom[roomId].adjacentRoomsIds)
+            {
+                TraverseRooms(adjacentRoom, point, visited);
+            }
         }
     }
 }
