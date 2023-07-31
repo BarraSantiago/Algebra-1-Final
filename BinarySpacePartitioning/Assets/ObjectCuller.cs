@@ -56,6 +56,22 @@ public class ObjectCuller : MonoBehaviour
             _idRoom[i].MakeMembersInvisible();
         }
 
+        CreatePoints();
+
+        // se revisa la habitacion y se hace visible si contiene algun punto
+        for (short i = 0; i < _idRoom.Count; i++)
+        {
+            foreach (Vector3 point in _points)
+            {
+                if (CheckPointInsideRoom(i, point))
+                {
+                    _idRoom[i].MakeMembersVisible(); 
+                    break;
+                }
+            }
+        }
+
+        // comprobacion de objetos cullable
         for (int i = 0; i < _cullableObjects.Length; i++)
         {
             if (_idRoom[_cullableObjects[i].roomId].isVisible) continue;
@@ -67,25 +83,6 @@ public class ObjectCuller : MonoBehaviour
             if (objectPrinted)
             {
                 _idRoom[roomId].MakeMembersVisible();
-            }
-        }
-
-        for (short i = 0; i < _idRoom.Count; i++)
-        {
-            if (CheckPointInsideRoom(i, _mainCamera.transform.position))
-            {
-                _idRoom[i].MakeMembersInvisible();
-
-                CreatePoints();
-                
-                foreach (Vector3 point in _points)
-                {
-                    if (!CheckPointInFrustum(point)) continue;
-
-                    CheckRooms(i, point);
-                }
-                
-                break;
             }
         }
     }
@@ -183,13 +180,6 @@ public class ObjectCuller : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void CheckRooms(short roomId, Vector3 point)
-    {
-        HashSet<short> visited = new HashSet<short>();
-
-        TraverseRooms(roomId, point, visited);
     }
 
     private void TraverseRooms(short roomId, Vector3 point, HashSet<short> visited)
