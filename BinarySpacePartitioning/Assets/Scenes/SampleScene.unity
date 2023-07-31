@@ -234,7 +234,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 1
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &160300941
@@ -348,7 +347,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 3
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &181198305
@@ -462,7 +460,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 2
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &191696977
@@ -576,7 +573,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 3
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &197949476
@@ -784,7 +780,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 0
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &229744856
@@ -802,7 +797,7 @@ GameObject:
   - component: {fileID: 229744862}
   m_Layer: 0
   m_Name: Door (1)
-  m_TagString: Cullable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -898,7 +893,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 3
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &245715450
@@ -1012,7 +1006,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 4
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &253469844
@@ -1182,7 +1175,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 4
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &282272240
@@ -1407,7 +1399,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 4
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &390706874
@@ -1689,7 +1680,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 2
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &476572078
@@ -1803,7 +1793,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 3
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &483949939
@@ -1917,7 +1906,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 0
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &508808674
@@ -1935,7 +1923,7 @@ GameObject:
   - component: {fileID: 508808680}
   m_Layer: 0
   m_Name: Door (1)
-  m_TagString: Cullable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2031,7 +2019,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 1
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &515581815
@@ -2145,7 +2132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 3
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &541251357
@@ -2259,7 +2245,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 0
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &622670124
@@ -2277,7 +2262,7 @@ GameObject:
   - component: {fileID: 622670130}
   m_Layer: 0
   m_Name: Door (1)
-  m_TagString: Cullable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2373,7 +2358,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 2
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &631960097
@@ -2391,7 +2375,7 @@ GameObject:
   - component: {fileID: 631960103}
   m_Layer: 0
   m_Name: Door (2)
-  m_TagString: Cullable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2487,7 +2471,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 2
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &657409386
@@ -2601,7 +2584,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 3
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &661640201
@@ -2715,7 +2697,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 1
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &665244028
@@ -2829,7 +2810,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 2
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &671904161
@@ -2943,7 +2923,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 4
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &705507993
@@ -3151,7 +3130,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 1
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &742639840
@@ -3376,7 +3354,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 2
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &909334298
@@ -3394,7 +3371,7 @@ GameObject:
   - component: {fileID: 909334304}
   m_Layer: 0
   m_Name: Door (2)
-  m_TagString: Cullable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3490,7 +3467,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 3
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &932922332
@@ -3604,7 +3580,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 2
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &963194225
@@ -3809,7 +3784,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 4
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1026721687
@@ -3923,7 +3897,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 3
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1026744516
@@ -3941,7 +3914,7 @@ GameObject:
   - component: {fileID: 1026744522}
   m_Layer: 0
   m_Name: Door (2)
-  m_TagString: Cullable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4037,7 +4010,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 4
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1066846552
@@ -4151,7 +4123,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 0
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1067089374
@@ -4265,7 +4236,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 1
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1126019632
@@ -4283,7 +4253,7 @@ GameObject:
   - component: {fileID: 1126019638}
   m_Layer: 0
   m_Name: Door (1)
-  m_TagString: Cullable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4379,7 +4349,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 4
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1167951645
@@ -4397,7 +4366,7 @@ GameObject:
   - component: {fileID: 1167951651}
   m_Layer: 0
   m_Name: Door (1)
-  m_TagString: Cullable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4493,7 +4462,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 0
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1211804140
@@ -4511,7 +4479,7 @@ GameObject:
   - component: {fileID: 1211804146}
   m_Layer: 0
   m_Name: Door (3)
-  m_TagString: Cullable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4607,7 +4575,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 4
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1214293500
@@ -4780,7 +4747,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 2
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1232255672
@@ -4894,7 +4860,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 0
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1328594543
@@ -5101,7 +5066,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 4
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1470709161
@@ -5215,7 +5179,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 0
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1527255356
@@ -5329,7 +5292,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 2
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1549663035
@@ -5443,7 +5405,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 4
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1560830446
@@ -5557,7 +5518,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 4
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1576075716
@@ -5841,7 +5801,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 3
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1724467999
@@ -6066,7 +6025,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 0
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1760428138
@@ -6180,7 +6138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 1
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1822040051
@@ -6198,7 +6155,7 @@ GameObject:
   - component: {fileID: 1822040057}
   m_Layer: 0
   m_Name: Door (2)
-  m_TagString: Cullable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6294,7 +6251,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 0
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1843842076
@@ -6408,7 +6364,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 1
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1849705917
@@ -6469,12 +6424,8 @@ MonoBehaviour:
   - {fileID: 742639845}
   - {fileID: 282272245}
   - {fileID: 390706879}
-  occluderLayer:
-    serializedVersion: 2
-    m_Bits: 128
   maxDistance: 17.15
   stepSize: 0.1
-  yAngle: 0
   numRays: 175
 --- !u!114 &1849705921
 MonoBehaviour:
@@ -6718,7 +6669,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 3
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1919033775
@@ -6832,7 +6782,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 4
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &1982324793
@@ -6859,7 +6808,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982324793}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.78, y: -1.1, z: -18.5}
+  m_LocalPosition: {x: 2.78, y: -3.99, z: -18.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6886,7 +6835,7 @@ GameObject:
   - component: {fileID: 2017735926}
   m_Layer: 0
   m_Name: Door (2)
-  m_TagString: Cullable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6982,7 +6931,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 1
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &2030592510
@@ -7096,7 +7044,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 1
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &2034530881
@@ -7210,7 +7157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 0
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &2037941329
@@ -7324,7 +7270,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 0
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
 --- !u!1 &2074882064
@@ -7438,6 +7383,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomId: 0
-  printed: 0
   objectVertices: []
   meshFilter: {fileID: 0}
