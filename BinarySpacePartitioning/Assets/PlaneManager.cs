@@ -1,13 +1,12 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlaneManager : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
 
     public GameObject[] planeObjects;
-    public static Action OnCameraChangeEvent;
+    public static Action onCameraChangeEvent;
 
     private float _lastFOV;
     private Vector3 _lastPosition;
@@ -40,7 +39,7 @@ public class PlaneManager : MonoBehaviour
 
         if (hasChanged)
         {
-            OnCameraChangeEvent?.Invoke();
+            onCameraChangeEvent?.Invoke();
 
             _lastFOV = mainCamera.fieldOfView;
             _lastPosition = objectTransform.position;

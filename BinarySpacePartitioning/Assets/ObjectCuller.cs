@@ -37,14 +37,14 @@ public class ObjectCuller : MonoBehaviour
 
     private void OnEnable()
     {
-        PlaneManager.OnCameraChangeEvent += Checkobjects;
+        PlaneManager.onCameraChangeEvent += Checkobjects;
 
         CullableObject.onCullableObjectCreation += UpdateCullableObjects;
     }
 
     private void OnDisable()
     {
-        PlaneManager.OnCameraChangeEvent -= Checkobjects;
+        PlaneManager.onCameraChangeEvent -= Checkobjects;
 
         CullableObject.onCullableObjectCreation -= UpdateCullableObjects;
     }
