@@ -5,17 +5,10 @@ using UnityEngine;
 
 public class LineTrajectory : MonoBehaviour
 {
-    // Start is called before the first frame update
     private LineRenderer lr;
     void Awake()
     {
         lr = GetComponent<LineRenderer>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void RenderLine(Vector3 startPoint, Vector3 endPoint)
